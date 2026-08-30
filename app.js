@@ -384,6 +384,60 @@ class KitApp {
         ? `<button class="next-step-btn" data-next-id="${nextId}">Neste modul →</button>`
         : '';
 
+        #articleHTML(article) {
+    const { query, activeId } = this.#state;
+    const words = query.split(/\s+/).filter(Boolean);
+    
+    const currentId = article["@id"] || article.id;
+    const isExpanded = currentId === activeId;
+
+    const titleHtml = this.#highlight(article.name ?? article.title ?? '', words);
+    const abstractHtml = this.#highlight(article.description ?? article.abstract ?? '', words);
+    
+    const articleTags = article.keywords || article.tags || [];
+    const tagsHtml = articleTags.map((tag) => {
+      const activeCls = tag === this.#state.tagFilter ? ' active' : '';
+      const tagHtml = this.#highlight(tag, words);
+      return `<button class="badge tag-click-btn${activeCls}" data-tag="${tag}">#${tagHtml}</button>`;
+    }).join(' ');
+
+    // FLUTTET OPP: expandedHtml må deklareres her først!
+    let expandedHtml = '';
+    if (isExpanded) {
+      const md = this.#getMarkdownRenderer();
+      let body = '';
+      
+      const textProp = article.text || article.body || article.markdownContent;
+      
+      if (textProp) {
+        if (typeof textProp === 'object' && textProp.text) {
+          const format = textProp.encodingFormat || '';
+          if (format === 'text/markdown') {
+            body = md ? md.render(textProp.text) : textProp.text;
+          } else if (format === 'text/html' || format === 'text/plain') {
+            body = textProp.text;
+          } else {
+            body = textProp.text;
+          }
+        } else if (typeof textProp === 'string') {
+          body = md ? md.render(textProp) : textProp;
+        }
+      }
+      
+      const currentTrack = article.audience?.educationalRole || article.educationalLevel || article.track;
+      const currentOrder = parseInt(article.courseCode || article.order || 0, 10);
+      
+      const next = this.#state.all.find((a) => {
+        const t = a.audience?.educationalRole || a.educationalLevel || a.track;
+        const o = parseInt(a.courseCode || a.order || 0, 10);
+        return t === currentTrack && o === (currentOrder + 1);
+      });
+      
+      const nextId = next ? (next["@id"] || next.id) : null;
+      const nextBtn = next
+        ? `<button class="next-step-btn" data-next-id="${nextId}">Neste modul →</button>`
+        : '';
+
       expandedHtml = `
         <div class="full-content">
           <div class="markdown-body">${body}</div>
@@ -396,7 +450,7 @@ class KitApp {
       `;
     }
 
-    // GENERERER DYNAMISK FORHÅNDSVISNING VED SØKETREFF I LUKKET MODUL
+    // FLYTTET NED: snippetHtml leser nå trygt etterpå uten referansefeil
     let snippetHtml = '';
     if (words.length > 0 && !isExpanded) {
       const snippet = this.#createSearchSnippet(article.text || article.body || article.markdownContent, words);
