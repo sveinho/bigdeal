@@ -141,8 +141,8 @@ class KitApp {
     }
     history.pushState({}, '', url);
   }
-  /**
-   * Kit Learning App - Part 2 (Universal Compatible Version)
+    /**
+   * Kit Learning App - Part 2 (Single-File Data Store - Fixed Search Engine)
    */
   _applyRoute() {
     const url = new URL(location.href);
@@ -161,7 +161,7 @@ class KitApp {
       this._state.activeId = id;
       this._state.tagFilter = null;
       this._filter(false);
-      this._ensureLoadedAndScroll(id, url.hash);
+      requestAnimationFrame(() => this._scrollToAnchor(url.hash));
     } else if (tag) {
       this._state.activeId = null;
       this._state.tagFilter = decodeURIComponent(tag);
@@ -193,48 +193,6 @@ class KitApp {
         articlesContainer.innerHTML = `<p class="error">Could not fetch index. Please ensure you are running via a local development server.</p>`;
       }
     }
-  }
-
-  async _prefetchAllModules() {
-    console.log("Starter bakgrunnslasting av fulltekstindeks...");
-    const promises = this._state.all.map(async (article) => {
-      if (article.text || article.body || article.markdownContent || !article.url) return;
-      try {
-        const res = await fetch(article.url);
-        if (res.ok) {
-          const fullModuleData = await res.json();
-          article.text = fullModuleData.text || fullModuleData.body || fullModuleData.markdownContent;
-        }
-      } catch (err) {
-        console.warn(`Bakgrunnslasting feilet for ${article["@id"] || article.id}:`, err);
-      }
-    });
-
-    await Promise.all(promises);
-    console.log("Fulltekstindeks ferdig lastet i bakgrunnen!");
-    
-    if (this._state.query.length >= 3) {
-      this._filter(false);
-    }
-  }
-
-  async _ensureLoadedAndScroll(articleId, hash) {
-    const article = this._state.all.find((a) => (a["@id"] || a.id) === articleId);
-    if (!article) return;
-    
-    if (!article.text && !article.body && !article.markdownContent && article.url) {
-      try {
-        const res = await fetch(article.url);
-        if (res.ok) {
-          const fullModuleData = await res.json();
-          article.text = fullModuleData.text || fullModuleData.body || fullModuleData.markdownContent;
-        }
-      } catch (err) {
-        console.error('Lazy loading failed for module file:', err);
-        article.text = '<p class="error">Error loading document.</p>';
-      }
-    }
-    requestAnimationFrame(() => this._scrollToAnchor(hash));
   }
 
   _filter(resetPagination = false) {
@@ -270,12 +228,13 @@ class KitApp {
     });
 
     if (isSearching) {
-      const first = words ?? '';
+      // FEILRETTING: Henter ut det FØRSTE ordet som en ren tekststreng [0] i stedet for hele matrisen (arrayen)!
+      const firstWordString = words[0] || '';
       const scoreOf = (title) => {
         const t = (title || '').toLowerCase().trim();
-        const c = first.replace(/^\./, '');
-        if (t === first || t === c) return 3;
-        if (t.startsWith(first) || t.startsWith(c)) return 2;
+        const c = firstWordString.replace(/^\./, '');
+        if (t === firstWordString || t === c) return 3;
+        if (t.startsWith(firstWordString) || t.startsWith(c)) return 2;
         return 1;
       };
       result.sort((a, b) => scoreOf(b.name || b.title) - scoreOf(a.name || a.title) || (a.name || a.title || '').localeCompare(b.name || b.title || ''));
@@ -295,6 +254,7 @@ class KitApp {
     if (resetPagination) this._state.displayed = CONFIG.itemsPerPage;
     this._render();
   }
+
    /**
    * Kit Learning App - Part 3 (Single-File Data Store - Fixed MD Identifier)
    */
