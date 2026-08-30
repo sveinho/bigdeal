@@ -13,7 +13,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "all"
       },
-      "url": "modules/navigating-kit.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -27,7 +28,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-      "url": "modules/context-managers.json"
+          "encodingFormat": "text/html",
+      "text": "<h3>Overskrift i HTML</h3><p>Dette tolkes direkte som rå <strong style=\"color: red;\">HTML</strong>-kode.</p>"
     },
     {
       "@type": "Course",
@@ -41,7 +43,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-      "url": "modules/standards-managers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -55,7 +58,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-      "url": "modules/roles-managers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -69,7 +73,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-      "url": "modules/legal-managers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -83,7 +88,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-      "url": "modules/requirements-deposits-managers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -97,7 +103,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/data-management-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -111,7 +118,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/data-sharing-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -125,7 +133,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/preservation-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -139,7 +148,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/preparing-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -153,7 +163,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/metadata-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
      {
       "@type": "Course",
@@ -167,7 +178,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/negotiating-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -181,7 +193,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-      "url": "modules/terms-researchers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -195,7 +208,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-      "url": "modules/data-management-trainers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -209,7 +223,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-      "url": "modules/curriculum-trainers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -223,7 +238,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-      "url": "modules/evaluation-trainers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -237,7 +253,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-      "url": "modules/four-trainers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     },
     {
       "@type": "Course",
@@ -251,7 +268,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-      "url": "modules/five-trainers.json"
+           "encodingFormat": "text/markdown", 
+      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
     }
   ]
 }
