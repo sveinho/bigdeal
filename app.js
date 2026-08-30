@@ -733,6 +733,36 @@ async #prefetchAllModules() {
     const re = new RegExp(`(${safeWords.join('|')})`, 'gi');
     return this.#escapeHtml(text).replace(re, '<mark>$1</mark>');
   }
+  #createSearchSnippet(textObj, queryWords) {
+    if (!textObj || !queryWords.length) return '';
+    
+    // Henter ut ren tekst uavhengig av om det er streng eller objekt
+    const rawText = typeof textObj === 'object' ? (textObj.text || '') : textObj;
+    if (!rawText) return '';
+
+    // Vi fjerner markdown-symboler i søke-snutten så det ser ryddig ut for brukeren
+    const cleanText = rawText.replace(/[#*`_\[\]()|]/g, ' ').replace(/\s+/g, ' ');
+    const lowerText = cleanText.toLowerCase();
+    
+    // Finn posisjonen til det første søkeordet
+    const firstWord = queryWords[0].replace(/^\./, '');
+    const index = lowerText.indexOf(firstWord);
+    
+    if (index === -1) return ''; // Søkeordet var ikke i brødteksten (kanskje det var i tittel/tags)
+
+    // Bestem start og stopp for utdraget (ca 60 tegn før ordet, 100 tegn etter)
+    const start = Math.max(0, index - 60);
+    const end = Math.min(cleanText.length, index + 100);
+    
+    let snippet = cleanText.slice(start, end).trim();
+    
+    // Legg til prikker (...) hvis vi kuttet midt i teksten
+    if (start > 0) snippet = '...' + snippet;
+    if (end < cleanText.length) snippet = snippet + '...';
+    
+    // Returner snutten ferdig highlightet med gult!
+    return this.#highlight(snippet, queryWords);
+  }
 
   #syncResetButton() {
     const { searchInput, resetBtn } = this.#refs;
