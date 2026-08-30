@@ -349,21 +349,23 @@ class KitApp {
     if (isExpanded) {
       const md = this._getMarkdownRenderer();
       let body = '';
+
+      const md = this._getMarkdownRenderer();
+      let body = '';
       
-      const textProp = article.text || article.body || article.markdownContent;
+      const rawMarkdown = article.text || article.body || article.markdownContent;
+      const format = article.encodingFormat || ''; // Henter formatet direkte fra kurset!
       
-      if (textProp) {
-        if (typeof textProp === 'object' && textProp.text) {
-          const format = textProp.encodingFormat || '';
-          if (format === 'text/markdown') {
-            body = md ? md.render(textProp.text) : textProp.text;
-          } else if (format === 'text/html' || format === 'text/plain') {
-            body = textProp.text;
-          } else {
-            body = textProp.text;
-          }
-        } else if (typeof textProp === 'string') {
-          body = md ? md.render(textProp) : textProp;
+      if (rawMarkdown) {
+        if (format === 'text/markdown') {
+          // Hvis det er deklarert som markdown, kjører vi det gjennom markdown-it
+          body = md ? md.render(rawMarkdown) : rawMarkdown;
+        } else if (format === 'text/html' || format === 'text/plain') {
+          // HTML og ren tekst dytes rett inn på skjermen uten endringer
+          body = rawMarkdown;
+        } else {
+          // FALLBACK: Hvis encodingFormat mangler, antar vi Markdown som standard
+          body = md ? md.render(rawMarkdown) : rawMarkdown;
         }
       }
       
