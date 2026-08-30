@@ -89,6 +89,7 @@ class KitApp {
     this.#bindEvents();
     this.#handleTagVisibility();
     await this.#loadArticles();
+    this.#prefetchAllModules(); 
   }
 
   #bindEvents() {
