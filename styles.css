@@ -621,7 +621,7 @@ mark {
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), background-color 0.2s;
 }
-.primary-btn
+.primaaaary-btn
 {
  background: #ebfbee;
   color: #2b8a3e;
