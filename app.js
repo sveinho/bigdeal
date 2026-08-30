@@ -295,8 +295,8 @@ class KitApp {
     if (resetPagination) this._state.displayed = CONFIG.itemsPerPage;
     this._render();
   }
-  /**
-   * Kit Learning App - Part 3 (Single-File Data Store with Flat Format Detection)
+   /**
+   * Kit Learning App - Part 3 (Single-File Data Store - Fixed MD Identifier)
    */
   _render() {
     const { articlesContainer, loadMoreWrapper } = this._refs;
@@ -347,19 +347,20 @@ class KitApp {
 
     let expandedHtml = '';
     if (isExpanded) {
-      const md = this._getMarkdownRenderer();
+      // KORRIGERT: Slettet "const md =" her siden den hentes automatisk eller defineres globalt
+      const markdownRenderer = this._getMarkdownRenderer();
       let body = '';
       
       const rawMarkdown = article.text || article.body || article.markdownContent;
-      const format = article.encodingFormat || ''; // Henter formatet flatt direkte fra modulen!
+      const format = article.encodingFormat || '';
       
       if (rawMarkdown) {
         if (format === 'text/markdown') {
-          body = md ? md.render(rawMarkdown) : rawMarkdown;
+          body = markdownRenderer ? markdownRenderer.render(rawMarkdown) : rawMarkdown;
         } else if (format === 'text/html' || format === 'text/plain') {
-          body = rawMarkdown; // HTML og ren tekst dytes rett inn på skjermen
+          body = rawMarkdown;
         } else {
-          body = md ? md.render(rawMarkdown) : rawMarkdown; // Fallback til Markdown
+          body = markdownRenderer ? markdownRenderer.render(rawMarkdown) : rawMarkdown;
         }
       }
       
@@ -458,6 +459,7 @@ class KitApp {
     }
     noResults?.classList.toggle('hidden', filtered.length > 0);
   }
+
   /**
    * Kit Learning App - Part 4 (Universal Compatible Version)
    */
