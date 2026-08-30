@@ -350,6 +350,41 @@ async #prefetchAllModules() {
     const tagsHtml = articleTags.map((tag) => {
       const activeCls = tag === this.#state.tagFilter ? ' active' : '';
       const tagHtml = this.#highlight(tag, words);
+      
+      
+          // Hent ut utdraget hvis brukeren søker og modulen er lukket
+    let snippetHtml = '';
+    if (words.length > 0 && !isExpanded) {
+      const snippet = this.#createSearchSnippet(article.text || article.body || article.markdownContent, words);
+      if (snippet) {
+        snippetHtml = `
+          <div class="search-match-snippet" style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid #bfdbfe; font-size: 0.85rem; color: #4a5568; font-style: italic;">
+            <strong>Treff i innhold:</strong> ${snippet}
+          </div>
+        `;
+      }
+    }
+
+    const badgeClass = `badge discipline-badge${isExpanded ? ' is-open' : ''}`;
+
+    return `
+      <article class="filterable" data-id="${currentId}">
+        <div class="article-header" style="display:flex;justify-content:space-between;align-items:flex-start;gap:15px;">
+          <h2 class="article-title-clickable" style="cursor:pointer;margin:0;">${titleHtml}</h2>
+          <button class="${badgeClass}" data-id="${currentId}" style="cursor:pointer;flex-shrink:0;white-space:nowrap;">
+            ${this.#escapeHtml(article.discipline || 'Unknown')}
+          </button>
+        </div>
+        <p class="abstract-text">${abstractHtml}</p>
+        
+        <!-- NYTT: Her dytter vi inn forhåndsvisningen hvis den finnes! -->
+        ${snippetHtml}
+        
+        ${expandedHtml}
+        <div class="article-tags-bottom">${tagsHtml}</div>
+      </article>
+    `;
+      
       return `<button class="badge tag-click-btn${activeCls}" data-tag="${tag}">#${tagHtml}</button>`;
     }).join(' ');
 
