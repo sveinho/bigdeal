@@ -196,7 +196,34 @@ class KitApp {
       }
     }
   }
+async #prefetchAllModules() {
+    console.log("Starter bakgrunnslasting av fulltekstindeks...");
+    
+    // Vi kjører lastingen parallelt, men kontrollert
+    const promises = this.#state.all.map(async (article) => {
+      // Hvis den allerede har innhold, eller mangler URL, hopper vi over
+      if (article.text || article.body || article.markdownContent || !article.url) return;
+      
+      try {
+        const res = await fetch(article.url);
+        if (res.ok) {
+          const fullModuleData = await res.json();
+          article.text = fullModuleData.text || fullModuleData.body || fullModuleData.markdownContent;
+        }
+      } catch (err) {
+        console.warn(`Bakgrunnslasting feilet for ${article.id}:`, err);
+      }
+    });
 
+    await Promise.all(promises);
+    console.log("Fulltekstindeks er ferdig lastet i bakgrunnen! Søk i brødtekst er nå 100 % aktivt.");
+    
+    // Hvis brukeren allerede har rukket å skrive noe i søkefeltet, kjører vi filteret 
+    // på nytt slik at de nye fullteksttreffene dukker opp med en gang.
+    if (this.#state.query.length >= 3) {
+      this.#filter(false);
+    }
+  }
   async #ensureLoadedAndScroll(articleId, hash) {
     const article = this.#state.all.find((a) => (a["@id"] || a.id) === articleId);
     if (!article) return;
