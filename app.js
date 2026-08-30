@@ -338,7 +338,7 @@ class KitApp {
       
       const nextId = next ? (next["@id"] || next.id) : null;
       const nextBtn = next
-        ? `<button class="next-step-btn" data-next-id="${nextId}">Neste modul →</button>`
+        ? `<button class="next-step-btn" data-next-id="${nextId}">Next module →</button>`
         : '';
 
       expandedHtml = `
