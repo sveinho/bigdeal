@@ -1,0 +1,257 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Course",
+      "@id": "navigating-kit",
+      "name": "Navigating the support kit",
+      "description": "First you will need to choose a learning path to get started. Choose the one that aligns best with your relevant role: researcher, manager or trainer. The same topic can often be described within all three learning paths and based on this: You should limit your search or widening it to include the wanted learning paths (either one or all). You will need to use three or more letters in a search. All modules are interactive and can be opened or closed according to your preference. Hopefully, this is enough information to navigate this resource. Lets get started.",
+      "discipline": "Information",
+      "courseCode": "1",
+      "keywords": ["learning", "training", "navigating"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "all"
+      },
+      "url": "modules/navigating-kit.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "context-managers",
+      "name": "Defining context (data governance for a TDR/A)",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Manager Module #1",
+      "courseCode": "1",
+      "keywords": ["governance", "compliance", "workflow"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "managers"
+      },
+      "url": "modules/context-managers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "standards-managers",
+      "name": "Defining data standards (data governance for TDR/A)",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Manager Module #2",
+      "courseCode": "2",
+      "keywords": ["security", "risk", "cloud"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "managers"
+      },
+      "url": "modules/standards-managers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "roles-managers",
+      "name": "Defining roles and competence (data governance for TDR/A)",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Manager Module #3",
+      "courseCode": "3",
+      "keywords": ["analytics", "dashboards", "bi"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "managers"
+      },
+      "url": "modules/roles-managers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "legal-managers",
+      "name": "Defining Legal & Ethical aspects (data governance for TDR/A)",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Manager Module #4",
+      "courseCode": "4",
+      "keywords": ["analytics", "dashboards", "both"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "managers"
+      },
+      "url": "modules/legal-managers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "requirements-deposits-managers",
+      "name": "Defining recommendations and requirements for deposits",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Manager Module #5",
+      "courseCode": "5",
+      "keywords": ["arena", "lights", "both"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "managers"
+      },
+      "url": "modules/requirements-deposits-managers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "data-management-researchers",
+      "name": "Planning reuse and data sharing in research projects",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #1",
+      "courseCode": "1",
+      "keywords": ["reuse", "sharing", "create", "collect", "quality", "metadata"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/data-management-researchers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "data-sharing-researchers",
+      "name": "Deciding on a repository for your research data",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #2",
+      "courseCode": "2",
+      "keywords": ["EDEN registry", "re3data", "trustworthyness"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/data-sharing-researchers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "preservation-researchers",
+      "name": "Aligning data to community norms",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #3",
+      "courseCode": "3",
+      "keywords": ["community watch", "community engagement", "security"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/preservation-researchers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "preparing-researchers",
+      "name": "Preparing deposits - file formats and technical data quality",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #4",
+      "courseCode": "4",
+      "keywords": ["community watch", "community engagement", "security"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/preparing-researchers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "metadata-researchers",
+      "name": "Preparing metadata - reusing information and metadata quality",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #5",
+      "courseCode": "5",
+      "keywords": ["community watch", "community engagement", "security"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/metadata-researchers.json"
+    },
+     {
+      "@type": "Course",
+      "@id": "negotiating-researchers",
+      "name": "Negotiating quality optimisation - technical, metadata, contextual quality",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #6",
+      "courseCode": "6",
+      "keywords": ["community watch", "community engagement", "security"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/negotiating-researchers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "terms-researchers",
+      "name": "Understanding rights and defining terms for reuse of the data",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Researcher Module #7",
+      "courseCode": "7",
+      "keywords": ["community watch", "community engagement", "security"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "researchers"
+      },
+      "url": "modules/terms-researchers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "data-management-trainers",
+      "name": "Teaching Data Management",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Trainer Module #1",
+      "courseCode": "1",
+      "keywords": ["teaching", "workshop", "literacy"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "trainers"
+      },
+      "url": "modules/data-management-trainers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "curriculum-trainers",
+      "name": "Curriculum Design for Data Literacy",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Trainer Module #2",
+      "courseCode": "2",
+      "keywords": ["curriculum", "workshop", "design"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "trainers"
+      },
+      "url": "modules/curriculum-trainers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "evaluation-trainers",
+      "name": "Measuring Training Impact",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Trainer Module #3",
+      "courseCode": "3",
+      "keywords": ["evaluation", "feedback", "metrics"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "trainers"
+      },
+      "url": "modules/evaluation-trainers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "four-trainers",
+      "name": "Measuring progress Impact",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Trainer Module #4",
+      "courseCode": "4",
+      "keywords": ["evaluation", "feedback", "metrics"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "trainers"
+      },
+      "url": "modules/four-trainers.json"
+    },
+    {
+      "@type": "Course",
+      "@id": "five-trainers",
+      "name": "Assessing Training Import",
+      "description": "Morbi convallis auctor augue quis pharetra. Vestibulum convallis ligula sed fringilla facilisis. Cras dignissim condimentum mauris, et pellentesque tortor pharetra ac. Morbi dignissim facilisis elit id consequat. Donec sollicitudin dictum arcu eu euismod. Curabitur in odio ac mi semper tincidunt. Morbi venenatis, elit id rhoncus maximus, enim lorem tristique nulla, vitae tristique ante libero non nibh. Vivamus sed euismod risus.",
+      "discipline": "Trainer Module #5",
+      "courseCode": "5",
+      "keywords": ["evaluation", "feedback", "metrics"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "trainers"
+      },
+      "url": "modules/five-trainers.json"
+    }
+  ]
+}
