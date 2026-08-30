@@ -1,5 +1,5 @@
 /**
- * Kit Learning App - Part 1: Setup & Initialization (Intelligent JSON-LD Format Version)
+ * Kit Learning App - Part 1: Setup & Initialization (Fulltext Prefetch & Snippet Version)
  */
 
 const SELECTORS = {
@@ -89,7 +89,8 @@ class KitApp {
     this.#bindEvents();
     this.#handleTagVisibility();
     await this.#loadArticles();
-    this.#prefetchAllModules(); 
+    // Starter den usynlige bakgrunnslastingen umiddelbart etter at hovedindeksen er klar
+    this.#prefetchAllModules();
   }
 
   #bindEvents() {
@@ -144,7 +145,7 @@ class KitApp {
     history.pushState({}, '', url);
   }
   /**
-   * Kit Learning App - Part 2: Routing, Data Loading & JSON-LD Filtering
+   * Kit Learning App - Part 2: Routing, Loading, Prefetch & Filtering Logic
    */
   #applyRoute() {
     const url = new URL(location.href);
@@ -196,14 +197,11 @@ class KitApp {
       }
     }
   }
-async #prefetchAllModules() {
+
+  async #prefetchAllModules() {
     console.log("Starter bakgrunnslasting av fulltekstindeks...");
-    
-    // Vi kjører lastingen parallelt, men kontrollert
     const promises = this.#state.all.map(async (article) => {
-      // Hvis den allerede har innhold, eller mangler URL, hopper vi over
       if (article.text || article.body || article.markdownContent || !article.url) return;
-      
       try {
         const res = await fetch(article.url);
         if (res.ok) {
@@ -211,19 +209,18 @@ async #prefetchAllModules() {
           article.text = fullModuleData.text || fullModuleData.body || fullModuleData.markdownContent;
         }
       } catch (err) {
-        console.warn(`Bakgrunnslasting feilet for ${article.id}:`, err);
+        console.warn(`Bakgrunnslasting feilet for ${article["@id"] || article.id}:`, err);
       }
     });
 
     await Promise.all(promises);
-    console.log("Fulltekstindeks er ferdig lastet i bakgrunnen! Søk i brødtekst er nå 100 % aktivt.");
+    console.log("Fulltekstindeks ferdig lastet i bakgrunnen!");
     
-    // Hvis brukeren allerede har rukket å skrive noe i søkefeltet, kjører vi filteret 
-    // på nytt slik at de nye fullteksttreffene dukker opp med en gang.
     if (this.#state.query.length >= 3) {
       this.#filter(false);
     }
   }
+
   async #ensureLoadedAndScroll(articleId, hash) {
     const article = this.#state.all.find((a) => (a["@id"] || a.id) === articleId);
     if (!article) return;
@@ -233,7 +230,6 @@ async #prefetchAllModules() {
         const res = await fetch(article.url);
         if (res.ok) {
           const fullModuleData = await res.json();
-          // Lagrer enten objektet eller strengen som kommer fra den fødererte filen
           article.text = fullModuleData.text || fullModuleData.body || fullModuleData.markdownContent;
         }
       } catch (err) {
@@ -260,7 +256,6 @@ async #prefetchAllModules() {
       const currentName = a.name || a.title || '';
       const currentDesc = a.description || a.abstract || '';
       
-      // Henter ut søkbar tekst fra text-egenskapen, enten det er en streng eller et strukturert objekt
       let bodySearchText = '';
       if (a.text) {
         bodySearchText = typeof a.text === 'object' ? (a.text.text || '') : a.text;
@@ -304,7 +299,7 @@ async #prefetchAllModules() {
     this.#render();
   }
   /**
-   * Kit Learning App - Part 3: UI Rendering & Intelligent Format Detection
+   * Kit Learning App - Part 3: UI Rendering, Format Detection & Snippets
    */
   #render() {
     const { articlesContainer, loadMoreWrapper } = this.#refs;
@@ -350,41 +345,6 @@ async #prefetchAllModules() {
     const tagsHtml = articleTags.map((tag) => {
       const activeCls = tag === this.#state.tagFilter ? ' active' : '';
       const tagHtml = this.#highlight(tag, words);
-      
-      
-          // Hent ut utdraget hvis brukeren søker og modulen er lukket
-    let snippetHtml = '';
-    if (words.length > 0 && !isExpanded) {
-      const snippet = this.#createSearchSnippet(article.text || article.body || article.markdownContent, words);
-      if (snippet) {
-        snippetHtml = `
-          <div class="search-match-snippet" style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid #bfdbfe; font-size: 0.85rem; color: #4a5568; font-style: italic;">
-            <strong>Treff i innhold:</strong> ${snippet}
-          </div>
-        `;
-      }
-    }
-
-    const badgeClass = `badge discipline-badge${isExpanded ? ' is-open' : ''}`;
-
-    return `
-      <article class="filterable" data-id="${currentId}">
-        <div class="article-header" style="display:flex;justify-content:space-between;align-items:flex-start;gap:15px;">
-          <h2 class="article-title-clickable" style="cursor:pointer;margin:0;">${titleHtml}</h2>
-          <button class="${badgeClass}" data-id="${currentId}" style="cursor:pointer;flex-shrink:0;white-space:nowrap;">
-            ${this.#escapeHtml(article.discipline || 'Unknown')}
-          </button>
-        </div>
-        <p class="abstract-text">${abstractHtml}</p>
-        
-        <!-- NYTT: Her dytter vi inn forhåndsvisningen hvis den finnes! -->
-        ${snippetHtml}
-        
-        ${expandedHtml}
-        <div class="article-tags-bottom">${tagsHtml}</div>
-      </article>
-    `;
-      
       return `<button class="badge tag-click-btn${activeCls}" data-tag="${tag}">#${tagHtml}</button>`;
     }).join(' ');
 
@@ -397,18 +357,15 @@ async #prefetchAllModules() {
       
       if (textProp) {
         if (typeof textProp === 'object' && textProp.text) {
-          // INTELLIGENT FORMAT-DETEKSJON BASERT PÅ SCHEMA.ORG DEKLARASJON:
           const format = textProp.encodingFormat || '';
-          
           if (format === 'text/markdown') {
             body = md ? md.render(textProp.text) : textProp.text;
           } else if (format === 'text/html' || format === 'text/plain') {
-            body = textProp.text; // HTML dytes rett inn, ren tekst vises rått
+            body = textProp.text;
           } else {
-            body = textProp.text; // Fallback
+            body = textProp.text;
           }
         } else if (typeof textProp === 'string') {
-          // Fallback hvis innholdet bare er en flat tekststreng (antar Markdown som standard)
           body = md ? md.render(textProp) : textProp;
         }
       }
@@ -439,6 +396,19 @@ async #prefetchAllModules() {
       `;
     }
 
+    // GENERERER DYNAMISK FORHÅNDSVISNING VED SØKETREFF I LUKKET MODUL
+    let snippetHtml = '';
+    if (words.length > 0 && !isExpanded) {
+      const snippet = this.#createSearchSnippet(article.text || article.body || article.markdownContent, words);
+      if (snippet) {
+        snippetHtml = `
+          <div class="search-match-snippet" style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid #bfdbfe; font-size: 0.85rem; color: #4a5568; font-style: italic;">
+            <strong>Treff i innhold:</strong> ${snippet}
+          </div>
+        `;
+      }
+    }
+
     const badgeClass = `badge discipline-badge${isExpanded ? ' is-open' : ''}`;
 
     return `
@@ -450,6 +420,9 @@ async #prefetchAllModules() {
           </button>
         </div>
         <p class="abstract-text">${abstractHtml}</p>
+        
+        ${snippetHtml}
+        
         ${expandedHtml}
         <div class="article-tags-bottom">${tagsHtml}</div>
       </article>
@@ -494,7 +467,7 @@ async #prefetchAllModules() {
     noResults?.classList.toggle('hidden', filtered.length > 0);
   }
   /**
-   * Kit Learning App - Part 4: Search Threshold, Color States & Click Handlers
+   * Kit Learning App - Part 4: Snippet Engine, Color States & Click Handlers
    */
   #onSearch(raw) {
     const cleanQuery = raw.trim().toLowerCase();
@@ -572,13 +545,11 @@ async #prefetchAllModules() {
     
     const article = this.#state.all.find((a) => (a["@id"] || a.id) === id);
     
-    // LATLASTER DEN INDIVIDUELLE JSON-LD MODULFILEN HVIS INNHOLDET IKKE ER I MINNET:
     if (article && !article.text && !article.body && !article.markdownContent && article.url) {
       try {
         const res = await fetch(article.url);
         if (res.ok) {
           const fullModuleData = await res.json();
-          // Bevarer det strukturerte text-objektet (med encodingFormat) direkte i minnet
           article.text = fullModuleData.text || fullModuleData.body || fullModuleData.markdownContent;
         }
       } catch (err) {
@@ -744,6 +715,30 @@ async #prefetchAllModules() {
     expanded.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  #createSearchSnippet(textObj, queryWords) {
+    if (!textObj || !queryWords.length) return '';
+    const rawText = typeof textObj === 'object' ? (textObj.text || '') : textObj;
+    if (!rawText) return '';
+
+    const cleanText = rawText.replace(/[#*`_\[\]()|]/g, ' ').replace(/\s+/g, ' ');
+    const lowerText = cleanText.toLowerCase();
+    
+    const firstWord = queryWords[0] || '';
+    if (!firstWord) return '';
+    
+    const index = lowerText.indexOf(firstWord.toLowerCase());
+    if (index === -1) return '';
+
+    const start = Math.max(0, index - 60);
+    const end = Math.min(cleanText.length, index + 100);
+    
+    let snippet = cleanText.slice(start, end).trim();
+    if (start > 0) snippet = '...' + snippet;
+    if (cleanText.length > end) snippet = snippet + '...';
+    
+    return this.#highlight(snippet, queryWords);
+  }
+
   #getMarkdownRenderer() {
     if (this.#md) return this.#md;
     const ctor = typeof window.markdownit === 'function' ? window.markdownit : null;
@@ -767,36 +762,6 @@ async #prefetchAllModules() {
 
     const re = new RegExp(`(${safeWords.join('|')})`, 'gi');
     return this.#escapeHtml(text).replace(re, '<mark>$1</mark>');
-  }
-  #createSearchSnippet(textObj, queryWords) {
-    if (!textObj || !queryWords.length) return '';
-    
-    // Henter ut ren tekst uavhengig av om det er streng eller objekt
-    const rawText = typeof textObj === 'object' ? (textObj.text || '') : textObj;
-    if (!rawText) return '';
-
-    // Vi fjerner markdown-symboler i søke-snutten så det ser ryddig ut for brukeren
-    const cleanText = rawText.replace(/[#*`_\[\]()|]/g, ' ').replace(/\s+/g, ' ');
-    const lowerText = cleanText.toLowerCase();
-    
-    // Finn posisjonen til det første søkeordet
-    const firstWord = queryWords[0].replace(/^\./, '');
-    const index = lowerText.indexOf(firstWord);
-    
-    if (index === -1) return ''; // Søkeordet var ikke i brødteksten (kanskje det var i tittel/tags)
-
-    // Bestem start og stopp for utdraget (ca 60 tegn før ordet, 100 tegn etter)
-    const start = Math.max(0, index - 60);
-    const end = Math.min(cleanText.length, index + 100);
-    
-    let snippet = cleanText.slice(start, end).trim();
-    
-    // Legg til prikker (...) hvis vi kuttet midt i teksten
-    if (start > 0) snippet = '...' + snippet;
-    if (end < cleanText.length) snippet = snippet + '...';
-    
-    // Returner snutten ferdig highlightet med gult!
-    return this.#highlight(snippet, queryWords);
   }
 
   #syncResetButton() {
