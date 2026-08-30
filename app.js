@@ -296,7 +296,7 @@ class KitApp {
     this._render();
   }
   /**
-   * Kit Learning App - Part 3 (Universal Compatible Version)
+   * Kit Learning App - Part 3 (Single-File Data Store with Flat Format Detection)
    */
   _render() {
     const { articlesContainer, loadMoreWrapper } = this._refs;
@@ -349,23 +349,17 @@ class KitApp {
     if (isExpanded) {
       const md = this._getMarkdownRenderer();
       let body = '';
-
-      const md = this._getMarkdownRenderer();
-      let body = '';
       
       const rawMarkdown = article.text || article.body || article.markdownContent;
-      const format = article.encodingFormat || ''; // Henter formatet direkte fra kurset!
+      const format = article.encodingFormat || ''; // Henter formatet flatt direkte fra modulen!
       
       if (rawMarkdown) {
         if (format === 'text/markdown') {
-          // Hvis det er deklarert som markdown, kjører vi det gjennom markdown-it
           body = md ? md.render(rawMarkdown) : rawMarkdown;
         } else if (format === 'text/html' || format === 'text/plain') {
-          // HTML og ren tekst dytes rett inn på skjermen uten endringer
-          body = rawMarkdown;
+          body = rawMarkdown; // HTML og ren tekst dytes rett inn på skjermen
         } else {
-          // FALLBACK: Hvis encodingFormat mangler, antar vi Markdown som standard
-          body = md ? md.render(rawMarkdown) : rawMarkdown;
+          body = md ? md.render(rawMarkdown) : rawMarkdown; // Fallback til Markdown
         }
       }
       
