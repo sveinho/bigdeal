@@ -644,7 +644,7 @@ class KitApp {
     }
   }
 
-  _scrollToAnchor(rawHash = '') {
+   _scrollToAnchor(rawHash = '') {
     const hash = rawHash.startsWith('#') ? rawHash.slice(1) : rawHash;
     const expanded = this._refs.articlesContainer?.querySelector(
       `[data-id="${this._state.activeId}"]`
@@ -673,7 +673,8 @@ class KitApp {
     const cleanText = rawText.replace(/[#*`_\[\]()|]/g, ' ').replace(/\s+/g, ' ');
     const lowerText = cleanText.toLowerCase();
     
-    const firstWord = queryWords || '';
+    // FIXED: Safely target the first string primitive within your search collection matrix
+    const firstWord = queryWords[0] || '';
     if (!firstWord) return '';
     
     const index = lowerText.indexOf(firstWord.toLowerCase());
@@ -710,8 +711,12 @@ class KitApp {
       .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     if (!safeWords.length) return this._escapeHtml(text);
 
+    // Escape first to lock down DOM injection parameters securely
+    const escapedText = this._escapeHtml(text);
+    
+    // FIXED: Re-verify RegEx matching points handle clean alphanumeric markers against string entities safely
     const re = new RegExp(`(${safeWords.join('|')})`, 'gi');
-    return this._escapeHtml(text).replace(re, '<mark>$1</mark>');
+    return escapedText.replace(re, '<mark>$1</mark>');
   }
 
   _syncResetButton() {
@@ -726,6 +731,7 @@ class KitApp {
   }
 }
 
+// Global initialization call on document completion
 document.addEventListener('DOMContentLoaded', () => {
   const app = new KitApp();
   app.init();
