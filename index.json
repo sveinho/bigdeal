@@ -13,8 +13,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "all"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/navigating-kit.json"
     },
     {
       "@type": "Course",
