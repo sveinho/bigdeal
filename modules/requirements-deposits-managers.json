@@ -1,6 +1,6 @@
 {
   "@context": "https://schema.org",
-  "@type": "Course",
+  "@type": "TextDigitalDocument",
   "@id": "requirements-deposits-managers",
   "name": "Teaching Data Management",
   "encodingFormat": "text/markdown",
