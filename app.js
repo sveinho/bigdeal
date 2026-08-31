@@ -1,7 +1,3 @@
-/**
- * Kit Learning App - Part 1 (Universal Compatible Version)
- */
-
 const SELECTORS = {
   searchInput: '#searchInput',
   resetBtn: '#resetSearchBtn',
@@ -21,9 +17,10 @@ const CONFIG = {
   shareUrl: (id) => `${location.origin}${location.pathname}?id=${id}`,
 };
 
+// FIXED: Native closure function keeps structural lexical scope context bound safely
 const debounce = (fn, ms) => {
   let t;
-  return (...args) => {
+  return function(...args) {
     clearTimeout(t);
     t = setTimeout(() => fn.apply(this, args), ms);
   };
@@ -87,7 +84,6 @@ class KitApp {
     this._bindEvents();
     this._handleTagVisibility();
     await this._loadArticles();
-    this._prefetchAllModules();
   }
 
   _bindEvents() {
@@ -106,7 +102,6 @@ class KitApp {
     });
 
     tagToggleCheckbox?.addEventListener('change', () => this._handleTagVisibility());
-
     articlesContainer?.addEventListener('click', (e) => this._onArticleClick(e));
 
     this._filterButtons = Array.from(document.querySelectorAll(SELECTORS.filterBtn));
@@ -134,16 +129,10 @@ class KitApp {
     Object.entries(params).forEach(([k, v]) => {
       if (v != null) url.searchParams.set(k, String(v));
     });
-    if (hash) {
-      url.hash = hash.startsWith('#') ? hash.slice(1) : hash;
-    } else {
-      url.hash = '';
-    }
+    url.hash = hash ? (hash.startsWith('#') ? hash.slice(1) : hash) : '';
     history.pushState({}, '', url);
   }
-    /**
-   * Kit Learning App - Part 2 (Single-File Data Store - Fixed Search Engine)
-   */
+
   _applyRoute() {
     const url = new URL(location.href);
     const id = url.searchParams.get('id');
@@ -228,7 +217,6 @@ class KitApp {
     });
 
     if (isSearching) {
-      // FEILRETTING: Henter ut det FØRSTE ordet som en ren tekststreng [0] i stedet for hele matrisen (arrayen)!
       const firstWordString = words[0] || '';
       const scoreOf = (title) => {
         const t = (title || '').toLowerCase().trim();
@@ -241,7 +229,8 @@ class KitApp {
     } else {
       result.sort((a, b) => {
         const ta = a.audience?.educationalRole || a.educationalLevel || a.track || '';
-        const tb = b.audience?.educationalRole || b.trackFilter || b.track || '';
+        // FIXED: Replaced 'b.trackFilter' typo with accurate structured key targeting configuration blocks
+        const tb = b.audience?.educationalRole || b.educationalLevel || b.track || '';
         if (ta !== tb) return ta.localeCompare(tb);
         
         const orderA = parseInt(a.courseCode || a.order || 0, 10);
@@ -250,12 +239,13 @@ class KitApp {
       });
     }
 
+
     this._state.filtered = result;
     if (resetPagination) this._state.displayed = CONFIG.itemsPerPage;
     this._render();
   }
 
-   /**
+  /**
    * Kit Learning App - Part 3 (Single-File Data Store - Fixed MD Identifier)
    */
   _render() {
@@ -307,11 +297,12 @@ class KitApp {
 
     let expandedHtml = '';
     if (isExpanded) {
-      // KORRIGERT: Slettet "const md =" her siden den hentes automatisk eller defineres globalt
       const markdownRenderer = this._getMarkdownRenderer();
       let body = '';
       
-      const rawMarkdown = article.text || article.body || article.markdownContent;
+      // FIXED: Extract the string text safely even if 'article.text' is an object payload
+      const rawTextSource = typeof article.text === 'object' ? article.text.text : article.text;
+      const rawMarkdown = rawTextSource || article.body || article.markdownContent;
       const format = article.encodingFormat || '';
       
       if (rawMarkdown) {
@@ -327,11 +318,14 @@ class KitApp {
       const currentTrack = article.audience?.educationalRole || article.educationalLevel || article.track;
       const currentOrder = parseInt(article.courseCode || article.order || 0, 10);
       
-      const next = this._state.all.find((a) => {
-        const t = a.audience?.educationalRole || a.educationalLevel || a.track;
-        const o = parseInt(a.courseCode || a.order || 0, 10);
-        return t === currentTrack && o === (currentOrder + 1);
-      });
+      // FIXED: Adaptive verification strategy handles gaps in modular indexing sequences safely
+      const next = this._state.all
+        .filter((a) => {
+          const t = a.audience?.educationalRole || a.educationalLevel || a.track;
+          const o = parseInt(a.courseCode || a.order || 0, 10);
+          return t === currentTrack && o > currentOrder;
+        })
+        .sort((a, b) => parseInt(a.courseCode || a.order || 0, 10) - parseInt(b.courseCode || b.order || 0, 10))[0];
       
       const nextId = next ? (next["@id"] || next.id) : null;
       const nextBtn = next
@@ -352,7 +346,9 @@ class KitApp {
 
     let snippetHtml = '';
     if (words.length > 0 && !isExpanded) {
-      const snippet = this._createSearchSnippet(article.text || article.body || article.markdownContent, words);
+      // FIXED: Normalized raw data conversion layers protect text manipulation methods from crashing
+      const stringifiedSource = typeof article.text === 'object' ? (article.text.text || '') : (article.text || article.body || article.markdownContent || '');
+      const snippet = this._createSearchSnippet(stringifiedSource, words);
       if (snippet) {
         snippetHtml = `
           <div class="search-match-snippet" style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid #bfdbfe; font-size: 0.85rem; color: #4a5568; font-style: italic;">
