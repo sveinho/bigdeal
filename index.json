@@ -28,8 +28,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-          "encodingFormat": "text/html",
-      "text": "<h3>Overskrift i HTML</h3><p>Dette tolkes direkte som rå <strong style=\"color: red;\">HTML</strong>-kode.</p>"
+          "encodingFormat": "text/markdown",
+           "url": "./modules/context-managers.json"
     },
     {
       "@type": "Course",
@@ -118,8 +118,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/data-sharing-researchers.json"
     },
     {
       "@type": "Course",
@@ -133,8 +133,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+          "encodingFormat": "text/markdown",
+           "url": "./modules/preservation-researchers.json"
     },
     {
       "@type": "Course",
@@ -148,8 +148,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/preparing-researchers.json"
     },
     {
       "@type": "Course",
@@ -163,8 +163,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/metadata-researchers.json"
     },
      {
       "@type": "Course",
@@ -178,8 +178,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/negotioting-researchers.json"
     },
     {
       "@type": "Course",
