@@ -2,71 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Local JSON Sections Test</title>
+    <title>Single File JSON Sections Test</title>
     <style>
-        body { font-family: sans-serif; margin: 0; padding: 0; }
-        .section-hero { background: #e0f2fe; padding: 40px; text-align: center; color: #0369a1; }
-        .section-info { padding: 20px; max-width: 600px; margin: 20px auto; line-height: 1.6; }
-        .section-banner { background: #fef3c7; color: #b45309; padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid #f59e0b; }
+        /* Base page styling */
+        body { font-family: sans-serif; margin: 0; padding: 0; background: #fafafa; }
+        
+        /* Section specific styles */
+        .section-hero { background: #e0f2fe; padding: 50px 20px; text-align: center; color: #0369a1; }
+        .section-hero h1 { margin: 0; font-size: 2.5rem; }
+        
+        .section-banner { background: #fef3c7; color: #b45309; padding: 12px; text-align: center; font-weight: bold; border-bottom: 1px solid #f59e0b; }
+        
+        .section-info { padding: 30px 20px; max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .section-info p { line-height: 1.6; color: #334155; margin: 0; }
     </style>
 </head>
 <body>
 
-    <div id="page-sections">Loading local mock elements...</div>
+    <!-- Target container for our dynamic elements -->
+    <div id="page-sections">Assembling components...</div>
 
     <script>
-        // Target the local static file instead of Sanity's CDN URL
-        const LOCAL_JSON_URL = './data.json';
-
-        async function loadLocalSections() {
-            try {
-                const response = await fetch(LOCAL_JSON_URL);
-                const data = await response.json();
-                
-                // Keep the exact same logic structure used for Sanity
-                const sections = data.result; 
-
-                const container = document.getElementById('page-sections');
-                container.innerHTML = ''; 
-
-                sections.forEach(section => {
-                    switch(section._type) {
-                        case 'hero':
-                            container.innerHTML += `
-                                <section class="section-hero">
-                                    <h1>${section.title}</h1>
-                                </section>
-                            `;
-                            break;
-                            
-                        case 'banner':
-                            container.innerHTML += `
-                                <div class="section-banner">
-                                    <span>${section.message}</span>
-                                </div>
-                            `;
-                            break;
-                            
-                        case 'info':
-                            container.innerHTML += `
-                                <section class="section-info">
-                                    <p>${section.text}</p>
-                                </section>
-                            `;
-                            break;
-                            
-                        default:
-                            console.warn('Unknown type:', section._type);
-                    }
-                });
-
-            } catch (error) {
-                console.error('Error reading the local JSON file:', error);
-                document.getElementById('page-sections').innerText = 'Failed to load static JSON. Ensure you are running a local web server.';
+        // 1. EMBEDDED MOCK JSON (Mimicking a Sanity payload)
+        const mockSanityData = {
+          "result": [
+            {
+              "_type": "banner",
+              "message": "⚡ Success: Running from a single local file with zero server setup!"
+            },
+            {
+              "_type": "hero",
+              "title": "Dynamic Component Rendering"
+            },
+            {
+              "_type": "info",
+              "text": "This pattern allows content creators to rearrange blocks in a CMS like Sanity, instantly changing the visual presentation layer of the frontend application without rewriting code."
             }
+          ]
+        };
+
+        // 2. RENDERING LOGIC
+        function renderPage() {
+            // Extract the sections array from the root payload
+            const sections = mockSanityData.result; 
+            
+            const container = document.getElementById('page-sections');
+            container.innerHTML = ''; // Wipe out default text
+
+            // Loop through each structured element
+            sections.forEach(section => {
+                switch(section._type) {
+                    case 'banner':
+                        container.innerHTML += `
+                            <div class="section-banner">
+                                <span>${section.message}</span>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'hero':
+                        container.innerHTML += `
+                            <section class="section-hero">
+                                <h1>${section.title}</h1>
+                            </section>
+                        `;
+                        break;
+                        
+                    case 'info':
+                        container.innerHTML += `
+                            <section class="section-info">
+                                <p>${section.text}</p>
+                            </section>
+                        `;
+                        break;
+                        
+                    default:
+                        console.warn('Encountered unregistered schema block type:', section._type);
+                }
+            });
         }
 
-        loadLocalSections();
+        // Fire rendering sequence immediately on script execution
+        renderPage();
     </script>
 </body>
 </html>
