@@ -2,15 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Filtered JSON Sections Test</title>
+    <title>Live Search & Filter JSON Sections</title>
     <style>
         /* Base page styling */
         body { font-family: sans-serif; margin: 0; padding: 0; background: #fafafa; }
         
-        /* Interactive Filter Bar Styling */
-        .filter-container { background: #1e293b; padding: 15px; text-align: center; color: white; position: sticky; top: 0; z-index: 100; }
-        .filter-container label { margin-right: 10px; font-weight: bold; }
-        .filter-container select { padding: 8px 12px; font-size: 14px; border-radius: 4px; border: none; cursor: pointer; }
+        /* Interactive Search & Filter Controls */
+        .controls-container { 
+            background: #1e293b; 
+            padding: 15px; 
+            color: white; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .control-group { display: flex; align-items: center; gap: 8px; }
+        .controls-container label { font-weight: bold; font-size: 14px; }
+        .controls-container select, 
+        .controls-container input { 
+            padding: 8px 12px; 
+            font-size: 14px; 
+            border-radius: 4px; 
+            border: none; 
+            outline: none;
+        }
+        .controls-container input { width: 200px; }
 
         /* Section Layout Container */
         #page-sections { padding-top: 20px; }
@@ -27,15 +48,24 @@
 </head>
 <body>
 
-    <!-- 1. FILTER INTERFACE -->
-    <div class="filter-container">
-        <label for="type-filter">Filter Sections by Type:</label>
-        <select id="type-filter">
-            <option value="all">Show All Sections</option>
-            <option value="hero">Hero Only</option>
-            <option value="banner">Banners Only</option>
-            <option value="info">Info Blocks Only</option>
-        </select>
+    <!-- 1. SEARCH & FILTER INTERFACE -->
+    <div class="controls-container">
+        <!-- Keyword Input -->
+        <div class="control-group">
+            <label for="search-box">Search Text:</label>
+            <input type="text" id="search-box" placeholder="Type 'API', 'Flash', 'design'...">
+        </div>
+        
+        <!-- Type Dropdown -->
+        <div class="control-group">
+            <label for="type-filter">Section Type:</label>
+            <select id="type-filter">
+                <option value="all">All Sections</option>
+                <option value="hero">Hero Only</option>
+                <option value="banner">Banners Only</option>
+                <option value="info">Info Blocks Only</option>
+            </select>
+        </div>
     </div>
 
     <!-- 2. CONTENT TARGET CONTAINER -->
@@ -53,25 +83,38 @@
           ]
         };
 
-        // RENDERING MECHANISM WITH BUILT-IN FILTERING
-        function renderPage(filterValue = 'all') {
-            const rawSections = mockSanityData.result;
-            const container = document.getElementById('page-sections');
-            container.innerHTML = ''; // Wipe out existing visual elements
+        // DOM Element References
+        const dropdown = document.getElementById('type-filter');
+        const searchBox = document.getElementById('search-box');
+        const container = document.getElementById('page-sections');
 
-            // Apply JavaScript Array Filter
+        // COMBINED FILTER & SEARCH LOGIC
+        function renderPage() {
+            const rawSections = mockSanityData.result;
+            const filterValue = dropdown.value;
+            const searchTerm = searchBox.value.toLowerCase().trim();
+
+            container.innerHTML = ''; // Wipe current views
+
+            // Filter the elements by type AND keyword match simultaneously
             const filteredSections = rawSections.filter(section => {
-                if (filterValue === 'all') return true;
-                return section._type === filterValue;
+                // Check 1: Type Matching
+                const matchesType = (filterValue === 'all' || section._type === filterValue);
+
+                // Check 2: Text Matching (checks whichever text property exists on the section object)
+                const textContent = (section.title || section.message || section.text || '').toLowerCase();
+                const matchesKeyword = textContent.includes(searchTerm);
+
+                return matchesType && matchesKeyword;
             });
 
-            // Display fallback message if no elements remain
+            // Display fallback if everything is filtered out
             if (filteredSections.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color: #64748b;">No sections match this criteria.</p>';
+                container.innerHTML = '<p style="text-align:center; color: #64748b; padding: 40px;">No sections match your search criteria.</p>';
                 return;
             }
 
-            // Loop and draw filtered components onto the DOM
+            // Loop and render matching nodes
             filteredSections.forEach(section => {
                 switch(section._type) {
                     case 'banner':
@@ -101,14 +144,11 @@
             });
         }
 
-        // EVENT LISTENER SETUP
-        const dropdown = document.getElementById('type-filter');
-        dropdown.addEventListener('change', (event) => {
-            // Re-run renderer with the value chosen by the user ('all', 'hero', 'banner', 'info')
-            renderPage(event.target.value);
-        });
+        // LISTENERS: Listen to both drop-down updates and user typing inputs
+        dropdown.addEventListener('change', renderPage);
+        searchBox.addEventListener('input', renderPage);
 
-        // Run full render sequence immediately upon first boot
+        // Run render sequence on initial window load
         renderPage();
     </script>
 </body>
