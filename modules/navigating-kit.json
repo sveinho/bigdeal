@@ -1,11 +1,8 @@
 {
   "@context": "https://schema.org",
-  "@type": "Course",
+  "@type": "TextDigitalDocument",
   "@id": "navigating-kit",
   "name": "Navigating the support kit",
-  "text": {
-    "@type": "TextDigitalDocument",
-    "encodingFormat": "text/html",
-    "text": "<h3>Overskrift i HTML</h3><p>Dette tolkes direkte som rå <strong style=\"color: red;\">HTML</strong>-kode.</p>"
-}
+  "encodingFormat": "text/html",
+  "text": "<h3>Overskrift i HTML</h3><p>Dette tolkes direkte som rå <strong style=\"color: red;\">HTML</strong>-kode.</p>"
 }
