@@ -1,11 +1,8 @@
 {
   "@context": "https://schema.org",
-  "@type": "Course",
+  "@type": "TextDigitalDocument",
   "@id": "terms-researchers",
   "name": "Terms in md",
-  "text": {
-    "@type": "TextDigitalDocument",
-    "encodingFormat": "text/markdown",
-    "text": "### Overskrift i Markdown\n* Dette er et **viktig** kulepunkt\n* Punkt to her"
+  "encodingFormat": "text/markdown",
+  "text": "### Overskrift i Markdown\n* Dette er et **viktig** kulepunkt\n* Punkt to her"
   }
-}
