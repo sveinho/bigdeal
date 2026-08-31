@@ -42,8 +42,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/standards-managers.json"
+        "url": "./modules/standards-managers.json"
     },
     {
       "@type": "Course",
@@ -57,8 +56,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/roles-managers.json"
+        "url": "./modules/roles-managers.json"
     },
     {
       "@type": "Course",
@@ -72,8 +70,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/legal-managers.json"
+        "url": "./modules/legal-managers.json"
     },
     {
       "@type": "Course",
@@ -87,8 +84,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/requirements-deposits-managers.json"
+        "url": "./modules/requirements-deposits-managers.json"
     },
     {
       "@type": "Course",
@@ -102,8 +98,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/data-management-researchers.json"
+        "url": "./modules/data-management-researchers.json"
     },
     {
       "@type": "Course",
@@ -117,8 +112,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/data-sharing-researchers.json"
+        "url": "./modules/data-sharing-researchers.json"
     },
     {
       "@type": "Course",
@@ -132,8 +126,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-          "encodingFormat": "text/markdown",
-           "url": "./modules/preservation-researchers.json"
+        "url": "./modules/preservation-researchers.json"
     },
     {
       "@type": "Course",
@@ -147,8 +140,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/preparing-researchers.json"
+        "url": "./modules/preparing-researchers.json"
     },
     {
       "@type": "Course",
@@ -162,8 +154,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/metadata-researchers.json"
+       "url": "./modules/metadata-researchers.json"
     },
      {
       "@type": "Course",
@@ -177,8 +168,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/negotioting-researchers.json"
+        "url": "./modules/negotioting-researchers.json"
     },
     {
       "@type": "Course",
@@ -192,8 +182,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/terms-researchers.json"
+        "url": "./modules/terms-researchers.json"
     },
     {
       "@type": "Course",
@@ -207,8 +196,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-            "encodingFormat": "text/markdown",
-           "url": "./modules/data-management-trainers.json"
+        "url": "./modules/data-management-trainers.json"
     },
     {
       "@type": "Course",
@@ -222,8 +210,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-            "encodingFormat": "text/markdown",
-           "url": "./modules/curriculum-trainers.json"
+        "url": "./modules/curriculum-trainers.json"
     },
     {
       "@type": "Course",
@@ -237,8 +224,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-            "encodingFormat": "text/markdown",
-           "url": "./modules/evaluation-trainers.json"
+        "url": "./modules/evaluation-trainers.json"
     },
     {
       "@type": "Course",
@@ -252,8 +238,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-            "encodingFormat": "text/markdown",
-           "url": "./modules/four-trainers.json"
+        "url": "./modules/four-trainers.json"
     },
     {
       "@type": "Course",
@@ -267,8 +252,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-           "encodingFormat": "text/markdown",
-           "url": "./modules/five-trainers.json"
+        "url": "./modules/five-trainers.json"
     }
   ]
 }
