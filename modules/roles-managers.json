@@ -1,11 +1,8 @@
 {
   "@context": "https://schema.org",
-  "@type": "Course",
+  "@type": "TextDigitalDocument",
   "@id": "roles-managers",
   "name": "Plain Text Test for now",
-  "text": {
-    "@type": "TextDigitalDocument",
-    "encodingFormat": "text/plain",
-    "text": "### Dette blir IKKE en overskrift.\nDet vises som ren tekst, inkludert stjerner for **fet skrift**."
+  "encodingFormat": "text/plain",
+  "text": "### Dette blir IKKE en overskrift.\nDet vises som ren tekst, inkludert stjerner for **fet skrift**."
   }
-}
