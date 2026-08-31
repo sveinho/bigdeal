@@ -13,8 +13,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "all"
       },
-            "encodingFormat": "text/html",
-      "text": "<h3>Overskrift i HTML</h3><p>Dette tolkes direkte som rå <strong style=\"color: red;\">HTML</strong>-kode.</p>"
+         "url": "./modules/navigating-kit.json"
     },
     {
       "@type": "Course",
