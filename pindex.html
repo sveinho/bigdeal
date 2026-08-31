@@ -2,55 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Single File JSON Sections Test</title>
+    <title>Filtered JSON Sections Test</title>
     <style>
         /* Base page styling */
         body { font-family: sans-serif; margin: 0; padding: 0; background: #fafafa; }
         
+        /* Interactive Filter Bar Styling */
+        .filter-container { background: #1e293b; padding: 15px; text-align: center; color: white; position: sticky; top: 0; z-index: 100; }
+        .filter-container label { margin-right: 10px; font-weight: bold; }
+        .filter-container select { padding: 8px 12px; font-size: 14px; border-radius: 4px; border: none; cursor: pointer; }
+
+        /* Section Layout Container */
+        #page-sections { padding-top: 20px; }
+
         /* Section specific styles */
-        .section-hero { background: #e0f2fe; padding: 50px 20px; text-align: center; color: #0369a1; }
+        .section-hero { background: #e0f2fe; padding: 50px 20px; text-align: center; color: #0369a1; margin-bottom: 20px; }
         .section-hero h1 { margin: 0; font-size: 2.5rem; }
         
-        .section-banner { background: #fef3c7; color: #b45309; padding: 12px; text-align: center; font-weight: bold; border-bottom: 1px solid #f59e0b; }
+        .section-banner { background: #fef3c7; color: #b45309; padding: 12px; text-align: center; font-weight: bold; border-bottom: 1px solid #f59e0b; margin-bottom: 20px; }
         
-        .section-info { padding: 30px 20px; max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .section-info { padding: 30px 20px; max-width: 600px; margin: 0 auto 20px auto; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .section-info p { line-height: 1.6; color: #334155; margin: 0; }
     </style>
 </head>
 <body>
 
-    <!-- Target container for our dynamic elements -->
+    <!-- 1. FILTER INTERFACE -->
+    <div class="filter-container">
+        <label for="type-filter">Filter Sections by Type:</label>
+        <select id="type-filter">
+            <option value="all">Show All Sections</option>
+            <option value="hero">Hero Only</option>
+            <option value="banner">Banners Only</option>
+            <option value="info">Info Blocks Only</option>
+        </select>
+    </div>
+
+    <!-- 2. CONTENT TARGET CONTAINER -->
     <div id="page-sections">Assembling components...</div>
 
     <script>
-        // 1. EMBEDDED MOCK JSON (Mimicking a Sanity payload)
+        // EMBEDDED DATASET
         const mockSanityData = {
           "result": [
-            {
-              "_type": "banner",
-              "message": "⚡ Success: Running from a single local file with zero server setup!"
-            },
-            {
-              "_type": "hero",
-              "title": "Dynamic Component Rendering"
-            },
-            {
-              "_type": "info",
-              "text": "This pattern allows content creators to rearrange blocks in a CMS like Sanity, instantly changing the visual presentation layer of the frontend application without rewriting code."
-            }
+            { "_type": "banner", "message": "⚡ Flash Sale: 50% off all content development packages today!" },
+            { "_type": "hero", "title": "Welcome to Our Platform" },
+            { "_type": "info", "text": "This first info block outlines the fundamental rules of component-driven design structures." },
+            { "_type": "banner", "message": "📢 Update: Version 2.0 of the API is now universally available." },
+            { "_type": "info", "text": "This second info block dives deep into data manipulation tactics using array mapping patterns." }
           ]
         };
 
-        // 2. RENDERING LOGIC
-        function renderPage() {
-            // Extract the sections array from the root payload
-            const sections = mockSanityData.result; 
-            
+        // RENDERING MECHANISM WITH BUILT-IN FILTERING
+        function renderPage(filterValue = 'all') {
+            const rawSections = mockSanityData.result;
             const container = document.getElementById('page-sections');
-            container.innerHTML = ''; // Wipe out default text
+            container.innerHTML = ''; // Wipe out existing visual elements
 
-            // Loop through each structured element
-            sections.forEach(section => {
+            // Apply JavaScript Array Filter
+            const filteredSections = rawSections.filter(section => {
+                if (filterValue === 'all') return true;
+                return section._type === filterValue;
+            });
+
+            // Display fallback message if no elements remain
+            if (filteredSections.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color: #64748b;">No sections match this criteria.</p>';
+                return;
+            }
+
+            // Loop and draw filtered components onto the DOM
+            filteredSections.forEach(section => {
                 switch(section._type) {
                     case 'banner':
                         container.innerHTML += `
@@ -75,14 +97,18 @@
                             </section>
                         `;
                         break;
-                        
-                    default:
-                        console.warn('Encountered unregistered schema block type:', section._type);
                 }
             });
         }
 
-        // Fire rendering sequence immediately on script execution
+        // EVENT LISTENER SETUP
+        const dropdown = document.getElementById('type-filter');
+        dropdown.addEventListener('change', (event) => {
+            // Re-run renderer with the value chosen by the user ('all', 'hero', 'banner', 'info')
+            renderPage(event.target.value);
+        });
+
+        // Run full render sequence immediately upon first boot
         renderPage();
     </script>
 </body>
