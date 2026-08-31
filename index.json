@@ -28,8 +28,7 @@
         "@type": "EducationalAudience",
         "educationalRole": "managers"
       },
-          "encodingFormat": "text/markdown",
-           "url": "./modules/context-managers.json"
+        "url": "./modules/context-managers.json"
     },
     {
       "@type": "Course",
