@@ -208,8 +208,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+            "encodingFormat": "text/markdown",
+           "url": "./modules/data-management-trainers.json"
     },
     {
       "@type": "Course",
@@ -223,8 +223,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+            "encodingFormat": "text/markdown",
+           "url": "./modules/curriculum-trainers.json"
     },
     {
       "@type": "Course",
@@ -238,8 +238,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+            "encodingFormat": "text/markdown",
+           "url": "./modules/evaluation-trainers.json"
     },
     {
       "@type": "Course",
@@ -253,8 +253,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+            "encodingFormat": "text/markdown",
+           "url": "./modules/four-trainers.json"
     },
     {
       "@type": "Course",
@@ -268,8 +268,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "trainers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/five-trainers.json"
     }
   ]
 }
