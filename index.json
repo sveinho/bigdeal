@@ -193,8 +193,8 @@
         "@type": "EducationalAudience",
         "educationalRole": "researchers"
       },
-           "encodingFormat": "text/markdown", 
-      "text": "## Komme i gang\nVelkommen til opplæringen! Dette tolkes som **Markdown**..."
+           "encodingFormat": "text/markdown",
+           "url": "./modules/terms-researchers.json"
     },
     {
       "@type": "Course",
