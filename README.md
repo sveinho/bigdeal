@@ -1,3 +1,9 @@
+### json files in the folder named modules are the basis for the full content.
+encoding can be html, plain or markdown in the json text field.
+
+### index.json in root is the basis for the course "index" / catalog of modules / front
+best effort json-ld is used in the json structures in both cases
+
 ### Note on sorting and order:
 
 To understand how the articles shift around when using the solution, we need to distinguish between two completely different modes in our search engine. 
@@ -24,10 +30,7 @@ As soon as you type a word into the search field, the default mode turns off com
 Your code assigns points (scoring) based on where your search term appears:3 points (Highest relevance): If the article title matches the exact word you searched for.2 points (Medium relevance): If the article title starts with the word you searched for.1 point (Lowest relevance): If the word is found anywhere inside the title text, inside the abstract (summary), or among the tags.In case of a tie (Equal score):If two articles get the exact same score (for example, if both contain the search term right in the middle of their abstracts), the code falls back on sorting the titles alphabetically (titleA.localeCompare(titleB)) to determine which one comes first.
 
 
-### json files in the folder named modules are the basis for the full content.
-### index.json in root is the basis for the course "index" / catalog of modules / front
-best effort json-ld in the json structures in both cases
-encoding can be html, plain or markdown in the json text field.
+
 
 ### Searching
 The words in a title and abstract and tags (defined in the file index.json) are the basis for the search function and the "front page". 
