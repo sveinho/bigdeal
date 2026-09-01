@@ -3,8 +3,6 @@
   "@type": "TextDigitalDocument",
   "@id": "navigating-kit",
   "name": "Navigating the support kit",
-  "encodingFormat": "text/html",
-  "text": "<h3>Overskrift i HTML</h3><p>Dette tolkes direkte som rå <strong style=\"color: red;\">HTML</strong>-kode.</p><video width=\"320\" height=\"240\" controls>
-  <source src=\"./movie.mp4\" type=\"video/mp4\">
-</video>"
+  "encodingFormat": "text/plain",
+  "text": "Not much to see here at this point in time"
 }
