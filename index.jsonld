@@ -2,6 +2,32 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "CollectionPage",
+      "@id": "https://example.com",
+      "url": "https://example.com",
+      "name": "Support Kit Learning Platform",
+      "description": "A modular learning resource for researchers, managers, and trainers.",
+      "hasPart": [
+        { "@id": "https://sveinho.github.io/kit-ld/?id=contxt-managers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=curriculum-trainers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=ndata-management-researchers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=data-management-trainers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=data-sharing-researchers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=evaluation-trainers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=five-trainers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=four-trainers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=legal-managers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=metadata-researchers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=negotiating-researchers" },
+         { "@id": "https://sveinho.github.io/kit-ld/?id=preparing-researchers" },
+         { "@id": "https://sveinho.github.io/kit-ld/?id=preservation-researchers" },
+         { "@id": "https://sveinho.github.io/kit-ld/?id=requirements-deposits-managers" },
+         { "@id": "https://sveinho.github.io/kit-ld/?id=oles-managers" },
+         { "@id": "https://sveinho.github.io/kit-ld/?id=standards-managers" },
+        { "@id": "https://sveinho.github.io/kit-ld/?id=terms-researchers" }
+      ]
+    },
+    {
       "@type": "Course",
       "@id": "navigating-kit",
       "name": "Navigating the support kit",
