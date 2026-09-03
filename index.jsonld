@@ -4,15 +4,17 @@
     {
       "@type": "CollectionPage",
       "@id": "https://sveinho.github.io/kit-ld/",
-      "name": "Support Kit Learning Platform",
-      "description": "A modular learning resource for researchers, managers, and trainers.",
+      "name": "Welcome to the Support Kit Learning Platform",
+       "description": "First you will need to choose a learning path to get started. Choose the one that aligns best with your relevant role: researcher, manager or trainer. The same topic can often be described within all three learning paths and based on this: You should limit your search or widening it to include the wanted learning paths (either one or all). You will need to use three or more letters in a search. All modules are interactive and can be opened or closed according to your preference. Hopefully, this is enough information to navigate this resource. Lets get started.",
       "discipline": "Information",
       "courseCode": "1",
       "keywords": ["learning", "training", "whataboutism"],
-       "audience": {
+            "audience": {
         "@type": "EducationalAudience",
         "educationalRole": "all"
       },
+         "url": "./modules/navigating-kit.json"
+    },
       "hasPart": [
         { "@id": "https://sveinho.github.io/kit-ld/?id=contxt-managers" },
         { "@id": "https://sveinho.github.io/kit-ld/?id=curriculum-trainers" },
@@ -32,20 +34,6 @@
         { "@id": "https://sveinho.github.io/kit-ld/?id=standards-managers" },
         { "@id": "https://sveinho.github.io/kit-ld/?id=terms-researchers" }
       ]
-    },
-    {
-      "@type": "Course",
-      "@id": "navigating-kit",
-      "name": "Navigating the support kit",
-      "description": "First you will need to choose a learning path to get started. Choose the one that aligns best with your relevant role: researcher, manager or trainer. The same topic can often be described within all three learning paths and based on this: You should limit your search or widening it to include the wanted learning paths (either one or all). You will need to use three or more letters in a search. All modules are interactive and can be opened or closed according to your preference. Hopefully, this is enough information to navigate this resource. Lets get started.",
-      "discipline": "Information",
-      "courseCode": "2",
-      "keywords": ["learning", "training", "navigating"],
-      "audience": {
-        "@type": "EducationalAudience",
-        "educationalRole": "all"
-      },
-         "url": "./modules/navigating-kit.json"
     },
     {
       "@type": "Course",
