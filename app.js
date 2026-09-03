@@ -170,7 +170,7 @@ class KitApp {
     try {
       const res = await fetch('index.jsonld');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const rawData = await res.jsonld();
+      const rawData = await res.json();
       
       this._state.all = rawData["@graph"] ? rawData["@graph"] : rawData;
       
