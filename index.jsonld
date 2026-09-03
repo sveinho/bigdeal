@@ -9,12 +9,6 @@
       "discipline": "Information",
       "courseCode": "1",
       "keywords": ["learning", "training", "whataboutism"],
-            "audience": {
-        "@type": "EducationalAudience",
-        "educationalRole": "all"
-      },
-         "url": "./modules/navigating-kit.json"
-    },
       "hasPart": [
         { "@id": "https://sveinho.github.io/kit-ld/?id=contxt-managers" },
         { "@id": "https://sveinho.github.io/kit-ld/?id=curriculum-trainers" },
