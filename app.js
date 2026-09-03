@@ -168,9 +168,9 @@ class KitApp {
   async _loadArticles() {
     const { articlesContainer } = this._refs;
     try {
-      const res = await fetch('index.json');
+      const res = await fetch('index.jsonld');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const rawData = await res.json();
+      const rawData = await res.jsonld();
       
       this._state.all = rawData["@graph"] ? rawData["@graph"] : rawData;
       
