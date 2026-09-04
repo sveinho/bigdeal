@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "TextDigitalDocument",
+  "@id": "navigating-kit",
+  "name": "Navigating the support kit",
+  "encodingFormat": "text/plain",
+  "text": "Not much to see here at this point in time"
+}
