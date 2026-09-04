@@ -1,5 +1,6 @@
 title: Kit-LD Portfolio
 description: Structured data module pipeline.
+baseurl: "/kit-ld"
 
 collections:
   modules:
