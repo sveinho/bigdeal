@@ -1,0 +1,7 @@
+title: Kit-LD Portfolio
+description: Structured data module pipeline.
+
+collections:
+  modules:
+    output: true
+    permalink: /modules/:path/
