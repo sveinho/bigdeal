@@ -146,7 +146,30 @@
             overflow: hidden;
             min-height: 0;
         }
-        .pane { display: flex; flex-direction: column; height: 100%; }
+
+        .pane { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    min-height: 0; /* Hindrer at panelet vokser forbi skjermkanten */
+}
+
+pre.json-preview {
+    margin: 0;
+    flex-grow: 1;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: #1a202c;
+    color: #ae81ff;
+    overflow-y: auto; /* Aktiverer vertikal scrollbar når innholdet blir langt */
+    overflow-x: auto; /* Aktiverer horisontal scrollbar for lange linjer */
+    font-family: "Fira Code", "Courier New", Courier, monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: pre; /* Endret fra pre-wrap til pre hvis du vil ha ren kode-rulling */
+    box-sizing: border-box;
+}
         
         textarea.md-input {
             width: 100%;
