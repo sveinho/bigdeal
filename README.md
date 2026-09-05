@@ -1,12 +1,15 @@
-### index.json is the basis for the full content. 
-encoding can be html, plain or markdown in the json text field, but only markdown is used at this point in time. (the same goes for the editor)
+An early mockup of Support kit T3.3
 
+### index.json is the basis for the full content. 
+encoding can be html, plain or markdown in the json text field, but only markdown is used at this point in time.
+
+### editor.html can be used to suggest changes (by one way or the other "submitting" the newly produced file you have exported)
 
 ### Note on filtering, sorting and order:
 
-"Track" or learning path is the top level filtering. Tags are next level for filtering, then search. 
+"Track" (or if you like: learning path) is the top level filtering. Tags are next level for filtering, then search. 
 
-Here is a simple explanation of how two sorting methods work in practice:
+A search will have hits in module titles, tags, module descriptions, as well as module content (the last shown as a "preview" area. 
 
 ### 1. Default Mode (When the search field is EMPTY)
 
