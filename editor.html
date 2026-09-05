@@ -3,71 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Modul- og Batch Editor</title>
+    <title>JSON Module Batch Editor</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0; padding: 20px; background-color: #f4f6f8; color: #2d3748;
-            height: 100vh; display: flex; flex-direction: column; box-sizing: border-box;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f8;
+            color: #2d3748;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
         .container {
-            max-width: 1800px; width: 100%; margin: 0 auto; background: #fff; padding: 20px;
-            border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            display: flex; flex-direction: column; flex-grow: 1; box-sizing: border-box; overflow: hidden;
+            max-width: 1800px;
+            width: 100%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            box-sizing: border-box;
+            overflow: hidden;
         }
         .header-bar {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #edf2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #edf2f7;
         }
         h2 { margin: 0; font-size: 1.4rem; color: #1a202c; }
+        
         .btn {
-            background-color: #3182ce; color: white; border: none; padding: 10px 18px;
-            border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s;
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
         }
         .btn:hover { background-color: #2b6cb0; }
         .btn-save { background-color: #38a169; }
         .btn-save:hover { background-color: #2f855a; }
-        .main-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; flex-grow: 1; overflow: hidden; }
-        .sidebar { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
-        .module-list { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+        .btn-danger { background-color: #e53e3e; }
+        .btn-danger:hover { background-color: #c53030; }
+        
+        /* Layout med modulvelger i sidepanel */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .module-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
         .module-item {
-            padding: 10px; background: #fff; border: 1px solid #cbd5e0; border-radius: 4px; cursor: pointer;
-            font-size: 0.85rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .module-item:hover { background: #edf2f7; }
-        .module-item.active { background: #ebf8ff; border-color: #3182ce; color: #2b6cb0; font-weight: 600; }
-        .editor-area { display: flex; flex-direction: column; overflow: hidden; }
-        .meta-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; background: #f7fafc; padding: 12px; border-radius: 6px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
+        .module-item.active {
+            background: #ebf8ff;
+            border-color: #3182ce;
+            color: #2b6cb0;
+            font-weight: 600;
+        }
+        
+        .editor-area {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .meta-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
         .meta-group { display: flex; flex-direction: column; }
         .meta-group.span-2 { grid-column: span 2; }
         .meta-group.span-4 { grid-column: span 4; }
-        label { font-weight: 600; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
-        input, textarea { padding: 6px 10px; border: 1px solid #cbd5e0; border-radius: 4px; font-size: 0.9rem; }
-        input:focus, textarea:focus { outline: none; border-color: #3182ce; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15); }
         
-        /* Arbeidsområdet tilpasses nå dynamisk uansett skjerm */
-        .workspace { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; flex-grow: 1; overflow: hidden; min-height: 0; }
-        
-        /* Låser panelhøyden og tvinger rulling internt i panelet */
-        .pane { display: flex; flex-direction: column; height: 100%; min-height: 0; }
-        
-        /* Gir tekstfeltet uavhengig scrollbar og fjerner manuell resizing som ødelegger designet */
-        textarea.md-input { 
-            width: 100%; 
-            flex-grow: 1; 
-            font-family: "Fira Code", "Courier New", Courier, monospace; 
-            font-size: 0.95rem; 
-            line-height: 1.5; 
-            padding: 12px; 
-            border: 1px solid #cbd5e0; 
-            border-radius: 6px; 
-            resize: none; 
-            box-sizing: border-box; 
-            background-color: #fcfcfc;
-            overflow-y: auto; /* Vertikal scrollbar aktiveres automatisk ved lang tekst */
+        label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 3px;
+        }
+        input, textarea {
+            padding: 6px 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
         
-        pre.json-preview { margin: 0; flex-grow: 1; border: 1px solid #cbd5e0; border-radius: 6px; padding: 12px; background-color: #1a202c; color: #ae81ff; overflow-y: auto; overflow-x: auto; font-family: "Fira Code", "Courier New", Courier, monospace; font-size: 0.85rem; line-height: 1.4; white-space: pre; box-sizing: border-box; }
+        /* Split Screen for Tekst vs JSON-streng */
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            flex-grow: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+        .pane { display: flex; flex-direction: column; height: 100%; }
+        
+        textarea.md-input {
+            width: 100%;
+            flex-grow: 1;
+            font-family: "Fira Code", "Courier New", Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            resize: none;
+            box-sizing: border-box;
+            background-color: #fcfcfc;
+        }
+        
+        /* Ren JSON-streng pre-visning */
+        pre.json-preview {
+            margin: 0;
+            flex-grow: 1;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            padding: 12px;
+            background-color: #1a202c;
+            color: #ae81ff;
+            overflow-y: auto;
+            font-family: "Fira Code", "Courier New", Courier, monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            box-sizing: border-box;
+        }
         .json-key { color: #f92672; }
         .json-string { color: #e6db74; }
         .json-number { color: #ae81ff; }
@@ -75,20 +185,21 @@
     </style>
 </head>
 <body>
+
 <div class="container">
     <div class="header-bar">
-        <h2>JSON Module & Batch Editor</h2>
+        <h2>JSON Modul- og Batch Editor</h2>
         <div>
             <input type="file" id="fileInput" accept=".json" style="display: none;">
-            <button class="btn" onclick="document.getElementById('fileInput').click()">Load JSON file</button>
-            <button class="btn btn-save" onclick="saveAllModules()">Export the new JSON file</button>
+            <button class="btn" onclick="document.getElementById('fileInput').click()">Last inn JSON-fil</button>
+            <button class="btn btn-save" onclick="saveAllModules()">Eksporter hele filen</button>
         </div>
     </div>
 
     <div class="main-layout">
         <!-- Venstre panel: Modulvelger -->
         <div class="sidebar">
-            <label>Modules in the file</label>
+            <label>Moduler i filen</label>
             <div id="moduleList" class="module-list">
                 <!-- Moduler dukker opp her dynamisk -->
                 <div style="color: #a0aec0; font-size: 0.85rem; padding: 10px;">Ingen fil lastet inn ennå...</div>
@@ -116,15 +227,15 @@
                     <input type="text" id="courseCode" oninput="syncCurrentData()">
                 </div>
                 <div class="meta-group span-2">
-                    <label for="name">Name / Title</label>
+                    <label for="name">Navn / Tittel</label>
                     <input type="text" id="name" oninput="syncCurrentData()">
                 </div>
                 <div class="meta-group span-2">
-                    <label for="keywords">Keywords (comma separated)</label>
+                    <label for="keywords">Keywords (separert med komma)</label>
                     <input type="text" id="keywords" oninput="syncCurrentData()">
                 </div>
                 <div class="meta-group span-4">
-                    <label for="description">Short Description</label>
+                    <label for="description">Kort beskrivelse (Description)</label>
                     <textarea id="description" rows="2" oninput="syncCurrentData()"></textarea>
                 </div>
             </div>
@@ -136,7 +247,7 @@
                     <textarea id="text" class="md-input" placeholder="Skriv din markdown her..." oninput="syncCurrentData()"></textarea>
                 </div>
                 <div class="pane">
-                    <label>Export Preview (Relevant object as JSON string)</label>
+                    <label>Eksport-forhåndsvisning (Gjeldende objekt som JSON-streng)</label>
                     <pre id="jsonPreview" class="json-preview"></pre>
                 </div>
             </div>
