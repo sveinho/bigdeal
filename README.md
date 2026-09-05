@@ -4,6 +4,7 @@ An early mockup of Support kit T3.3
 encoding can be html, plain or markdown in the json text field, but only markdown is used at this point in time.
 
 ### editor.html can be used to suggest changes (by one way or the other "submitting" the newly produced file you have exported)
+The whole index.json will be loaded and exportet - always (roundtrips without changing anything should always work for verification) 
 
 ### Note on filtering, sorting and order:
 
