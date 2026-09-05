@@ -1,14 +1,12 @@
 ### index.json is the basis for the full content. 
-encoding can be html, plain or markdown in the json text field, but only markdown is used at this stage.
+encoding can be html, plain or markdown in the json text field, but only markdown is used at this point in time. (the same goes for the editor)
 
 
-### Note on sorting and order:
+### Note on filtering, sorting and order:
 
-To understand how the articles shift around when using the solution, we need to distinguish between two completely different modes in our search engine. 
+"Track" or learning path is the top level filtering. Tags are next level for filtering, then search. 
 
-Your code and behavior is split in two based on whether the search field is empty or not.
-
-Here is a simple explanation of how the two sorting methods work in practice:
+Here is a simple explanation of how two sorting methods work in practice:
 
 ### 1. Default Mode (When the search field is EMPTY)
 
