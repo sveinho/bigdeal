@@ -352,7 +352,7 @@ class KitApp {
       if (snippet) {
         snippetHtml = `
           <div class="search-match-snippet" style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid #bfdbfe; font-size: 0.85rem; color: #4a5568; font-style: italic;">
-            <strong>Treff i innhold:</strong> ${snippet}
+            <strong>Hit in content:</strong> ${snippet}
           </div>
         `;
       }
