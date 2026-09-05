@@ -1,8 +1,6 @@
-### json files in the folder named modules are the basis for the full content.
-encoding can be html, plain or markdown in the json text field.
+### index.json is the basis for the full content. 
+encoding can be html, plain or markdown in the json text field, but only markdown is used at this stage.
 
-### index.json in root is the basis for the course "index" / catalog of modules / front
-best effort json-ld is used in the json structures in both cases
 
 ### Note on sorting and order:
 
